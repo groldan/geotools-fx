@@ -1,0 +1,34 @@
+**/.checkstyle
+**/.classpath
+**/.pmd
+**/.project
+**/.ruleset
+**/.settings
+**/.tomcatplugin
+**/work
+**/target/
+**/.svn
+**/.apt_generated
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
