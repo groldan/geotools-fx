@@ -25,11 +25,11 @@
     <jts.version>1.16.1</jts.version>
     <org.openjfx.javafx-maven-plugin.version>0.0.3</org.openjfx.javafx-maven-plugin.version>
     <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-    <org.controlsfx.controlsfx.version>11.0.0</org.controlsfx.controlsfx.version>
   </properties>
 
   <modules>
     <module>core</module>
+    <module>data</module>
     <module>demo</module>
   </modules>
 
@@ -42,6 +42,15 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <!-- revisit? this is where testfx-junit-4.0.16-alpha is -->
+      <id>jcenter.bintray.com</id>
+      <name>JCenter</name>
+      <url>https://jcenter.bintray.com</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>    
     <repository>
       <id>osgeo</id>
       <name>Open Source Geospatial Foundation Repository</name>
@@ -121,6 +130,11 @@
         <artifactId>fxgraphics2d</artifactId>
         <version>1.8</version>
       </dependency>
+      <dependency>
+        <groupId>org.controlsfx</groupId>
+        <artifactId>controlsfx</artifactId>
+        <version>11.0.0</version>
+      </dependency>
 
       <!-- GeoTools dependencies -->
       <dependency>
@@ -148,6 +162,31 @@
         <artifactId>gt-property</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-geopkg</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-postgis</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-oracle</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-arcsde</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-mongodb</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
       <!-- test dependencies -->
       <dependency>
@@ -162,6 +201,12 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.testfx</groupId>
+        <artifactId>testfx-junit</artifactId>
+        <version>4.0.16-alpha</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>3.1.0</version>
@@ -171,6 +216,13 @@
         <groupId>org.awaitility</groupId>
         <artifactId>awaitility</artifactId>
         <version>4.0.1</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- Additional test dependencies -->
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-sample-data</artifactId>
+        <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
@@ -195,6 +247,10 @@
     <dependency>
       <groupId>org.testfx</groupId>
       <artifactId>testfx-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-junit</artifactId>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>

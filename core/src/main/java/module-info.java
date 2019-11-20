@@ -9,8 +9,5 @@ module org.geotools.fx.core {
     requires transitive org.geotools.referencing;
     requires transitive org.geotools.main;
 
-    opens org.geotools.fx.data.model to
-            javafx.fxml;
-
     exports org.geotools.fx.data.model;
 }
