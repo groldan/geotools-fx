@@ -10,6 +10,12 @@
   <properties>
   </properties>
   <dependencies>
+<!-- https://mvnrepository.com/artifact/javax.measure/unit-api -->
+<dependency>
+    <groupId>javax.measure</groupId>
+    <artifactId>unit-api</artifactId>
+    <version>1.0</version>
+</dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-base</artifactId>
