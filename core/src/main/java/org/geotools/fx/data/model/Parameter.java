@@ -17,28 +17,22 @@ import java.util.logging.Level;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import lombok.Value;
 import lombok.experimental.Accessors;
 import lombok.extern.java.Log;
 import org.geotools.util.Converters;
 
 @Log
-@Value
 @ToString(onlyExplicitlyIncluded = true)
 @Accessors(fluent = true)
 public class Parameter {
 
-    private final ReadOnlyObjectProperty<ParameterDescriptor> descriptorProperty =
+    private final @Getter ReadOnlyObjectProperty<ParameterDescriptor> descriptorProperty =
             new SimpleObjectProperty<>(this, "descriptor");
 
-    @ToString.Include(name = "descriptor")
-    public ParameterDescriptor getDescriptor() {
-        return descriptorProperty.get();
-    }
-
-    private final ObjectProperty<Object> valueProperty =
+    private final @Getter ObjectProperty<Object> valueProperty =
             new SimpleObjectProperty<>(this, "value") {
                 public @Override void set(Object newValue) {
                     Object value = Converters.convert(newValue, getDescriptor().getType());
@@ -54,15 +48,6 @@ public class Parameter {
                 }
             };
 
-    @ToString.Include(name = "value")
-    public Object getValue() {
-        return valueProperty.get();
-    }
-
-    public void setValue(Object value) {
-        valueProperty.set(value);
-    }
-
     public Parameter(ParameterDescriptor descriptor) {
         this(descriptor, descriptor.defaultValueProperty().get());
     }
@@ -70,5 +55,19 @@ public class Parameter {
     public Parameter(@NonNull ParameterDescriptor descriptor, Object value) {
         ((ObjectProperty<ParameterDescriptor>) descriptorProperty).set(descriptor);
         setValue(value);
+    }
+
+    @ToString.Include(name = "descriptor")
+    public ParameterDescriptor getDescriptor() {
+        return descriptorProperty.get();
+    }
+
+    @ToString.Include(name = "value")
+    public Object getValue() {
+        return valueProperty.get();
+    }
+
+    public void setValue(Object value) {
+        valueProperty.set(value);
     }
 }

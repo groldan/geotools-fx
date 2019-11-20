@@ -22,13 +22,11 @@ import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import lombok.Value;
 import lombok.experimental.Accessors;
 import org.geotools.data.DataAccessFactory.Param;
 import org.opengis.util.InternationalString;
 
 /** JavaFX bean adapter for {@link Param DataAccessFactory#Param} */
-@Value
 @ToString(onlyExplicitlyIncluded = true)
 @Accessors(fluent = true)
 public class ParameterDescriptor {
@@ -43,18 +41,41 @@ public class ParameterDescriptor {
         }
 
         private final @Getter String displayName;
+
+        private static Level valueOf(Param parameter) {
+            Level l;
+            final String level = parameter.getLevel();
+            // HACK: some datastore factories don't advertise the (geoserver specific) "namespace"
+            // parameter as a program level parameter
+            final String name = parameter.getName();
+            if ("namespace".equals(name)) {
+                l = Level.PROGRAM;
+            } else {
+                switch (level) {
+                    case "advanced":
+                        l = Level.ADVANCED;
+                        break;
+                    case "program":
+                        l = Level.PROGRAM;
+                        break;
+                    default:
+                        l = Level.USER;
+                }
+            }
+            return l;
+        }
     }
 
-    private final ReadOnlyObjectProperty<Param> paramProperty;
-    private final ReadOnlyStringProperty nameProperty;
-    private final ReadOnlyStringProperty titleProperty;
-    private final ReadOnlyStringProperty descriptionProperty;
-    private final ReadOnlyObjectProperty<Class<?>> typeProperty;
-    private final ReadOnlyObjectProperty<Level> levelProperty;
-    private final ReadOnlyBooleanProperty passwordProperty;
-    private final ReadOnlyBooleanProperty requiredProperty;
-    private final ReadOnlyBooleanProperty deprecatedProperty;
-    private final ReadOnlyObjectProperty<Object> defaultValueProperty;
+    private final @Getter ReadOnlyObjectProperty<Param> paramProperty;
+    private final @Getter ReadOnlyStringProperty nameProperty;
+    private final @Getter ReadOnlyStringProperty titleProperty;
+    private final @Getter ReadOnlyStringProperty descriptionProperty;
+    private final @Getter ReadOnlyObjectProperty<Class<?>> typeProperty;
+    private final @Getter ReadOnlyObjectProperty<Level> levelProperty;
+    private final @Getter ReadOnlyBooleanProperty passwordProperty;
+    private final @Getter ReadOnlyBooleanProperty requiredProperty;
+    private final @Getter ReadOnlyBooleanProperty deprecatedProperty;
+    private final @Getter ReadOnlyObjectProperty<Object> defaultValueProperty;
 
     public ParameterDescriptor(@NonNull Param parameter) {
         this.paramProperty = new SimpleObjectProperty<>(this, "param", parameter);
@@ -68,7 +89,7 @@ public class ParameterDescriptor {
                         this,
                         "description",
                         description == null ? null : parameter.getDescription().toString());
-        this.levelProperty = new SimpleObjectProperty<>(this, "level", toLevelEnum(parameter));
+        this.levelProperty = new SimpleObjectProperty<>(this, "level", Level.valueOf(parameter));
         this.defaultValueProperty =
                 new SimpleObjectProperty<>(this, "defaultValue", parameter.getDefaultValue());
         this.passwordProperty = new SimpleBooleanProperty(this, "password", parameter.isPassword());
@@ -76,29 +97,6 @@ public class ParameterDescriptor {
         this.deprecatedProperty =
                 new SimpleBooleanProperty(this, "deprecated", parameter.isDeprecated());
         this.typeProperty = new SimpleObjectProperty<Class<?>>(this, "type", parameter.getType());
-    }
-
-    private Level toLevelEnum(Param parameter) {
-        Level l;
-        final String level = parameter.getLevel();
-        // HACK: some datastore factories don't advertise the (geoserver specific) "namespace"
-        // parameter as a program level parameter
-        final String name = parameter.getName();
-        if ("namespace".equals(name)) {
-            l = Level.PROGRAM;
-        } else {
-            switch (level) {
-                case "advanced":
-                    l = Level.ADVANCED;
-                    break;
-                case "program":
-                    l = Level.PROGRAM;
-                    break;
-                default:
-                    l = Level.USER;
-            }
-        }
-        return l;
     }
 
     public Param getParam() {

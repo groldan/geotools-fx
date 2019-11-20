@@ -2,6 +2,7 @@ module org.geotools.fx.core {
     requires static lombok;
     requires java.logging;
     requires transitive javafx.base;
+    requires transitive javafx.graphics;
     requires transitive org.locationtech.jts;
     requires transitive org.geotools.opengis;
     requires transitive org.geotools.metadata;
