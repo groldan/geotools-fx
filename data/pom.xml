@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.geotools.fx</groupId>
     <artifactId>gt-fx-parent</artifactId>
-    <version>23-SNAPSHOT</version>
+    <version>24-SNAPSHOT</version>
   </parent>
 
   <artifactId>gt-fx-data</artifactId>
@@ -17,6 +17,10 @@
     <dependency>
       <groupId>org.geotools.fx</groupId>
       <artifactId>gt-fx-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
     </dependency>
     <dependency>
       <groupId>org.controlsfx</groupId>
@@ -73,20 +77,15 @@
       <artifactId>gt-sample-data</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-junit</artifactId>
+    </dependency>
 
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <argLine>
-            --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-          </argLine>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
