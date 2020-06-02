@@ -48,7 +48,8 @@ public class ParameterDescriptor {
         private static Level valueOf(Param parameter) {
             Level l;
             final String level = parameter.getLevel();
-            // HACK: some datastore factories don't advertise the (geoserver specific) "namespace"
+            // HACK: some datastore factories don't advertise the (geoserver specific)
+            // "namespace"
             // parameter as a program level parameter
             final String name = parameter.getName();
             if ("namespace".equals(name)) {
