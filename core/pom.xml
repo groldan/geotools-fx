@@ -10,12 +10,12 @@
   <properties>
   </properties>
   <dependencies>
-<!-- https://mvnrepository.com/artifact/javax.measure/unit-api -->
-<dependency>
-    <groupId>javax.measure</groupId>
-    <artifactId>unit-api</artifactId>
-    <version>1.0</version>
-</dependency>
+    <!-- https://mvnrepository.com/artifact/javax.measure/unit-api -->
+    <dependency>
+      <groupId>javax.measure</groupId>
+      <artifactId>unit-api</artifactId>
+      <version>1.0</version>
+    </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-base</artifactId>
@@ -31,6 +31,10 @@
     <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-main</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-render</artifactId>
     </dependency>
     <dependency>
       <groupId>org.geotools</groupId>
