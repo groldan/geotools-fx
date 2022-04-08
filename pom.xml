@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.geotools</groupId>
     <artifactId>geotools</artifactId>
-    <version>24-SNAPSHOT</version>
+    <version>27-SNAPSHOT</version>
   </parent>
 
   <groupId>org.geotools.fx</groupId>
@@ -21,18 +21,18 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
-    <java.version>14</java.version>
-    <javafx.version>14.0.1</javafx.version>
-    <lombok.version>1.18.12</lombok.version>
-    <guava.version>29.0-jre</guava.version>
-    <jts.version>1.16.1</jts.version>
-    <mapstruct.version>1.3.1.Final</mapstruct.version>
-    <fxgraphics2d.version>2.0</fxgraphics2d.version>
-    <controlsfx.version>11.0.1</controlsfx.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <java.version>17</java.version>
+    <javafx.version>17.0.2</javafx.version>
+    <lombok.version>1.18.22</lombok.version>
+    <guava.version>31.1-jre</guava.version>
+    <jts.version>1.18.2</jts.version>
+    <mapstruct.version>1.4.2.Final</mapstruct.version>
+    <fxgraphics2d.version>2.1.3</fxgraphics2d.version>
+    <controlsfx.version>11.1.1</controlsfx.version>
     <org.openjfx.javafx-maven-plugin.version>0.0.4</org.openjfx.javafx-maven-plugin.version>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
   </properties>
 
   <dependencyManagement>

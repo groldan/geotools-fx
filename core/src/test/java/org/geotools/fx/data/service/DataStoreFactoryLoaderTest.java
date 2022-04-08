@@ -20,7 +20,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -185,7 +184,7 @@ public class DataStoreFactoryLoaderTest {
         boolean available = true;
 
         public @Override DataAccess<? extends FeatureType, ? extends Feature> createDataStore(
-                Map<String, Serializable> params) throws IOException {
+                Map<String, ?> params) throws IOException {
             return null;
         }
 
@@ -209,13 +208,11 @@ public class DataStoreFactoryLoaderTest {
     public static class TestDataStoreFactory extends TestDataAccessFactory
             implements DataStoreFactorySpi {
 
-        public @Override DataStore createDataStore(Map<String, Serializable> params)
-                throws IOException {
+        public @Override DataStore createDataStore(Map<String, ?> params) throws IOException {
             return null;
         }
 
-        public @Override DataStore createNewDataStore(Map<String, Serializable> params)
-                throws IOException {
+        public @Override DataStore createNewDataStore(Map<String, ?> params) throws IOException {
             return null;
         }
     }

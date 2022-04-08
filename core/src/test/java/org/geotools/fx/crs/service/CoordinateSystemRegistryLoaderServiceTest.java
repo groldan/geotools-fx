@@ -100,8 +100,7 @@ public class CoordinateSystemRegistryLoaderServiceTest {
             props.load(is);
         }
         final List<String> codes =
-                props.stringPropertyNames()
-                        .stream()
+                props.stringPropertyNames().stream()
                         .map(code -> String.format("EPSG:%s", code))
                         .collect(Collectors.toList());
         assertFalse(codes.isEmpty());

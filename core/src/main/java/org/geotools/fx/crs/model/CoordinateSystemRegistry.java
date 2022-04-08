@@ -151,8 +151,7 @@ public class CoordinateSystemRegistry {
             @NonNull String propertyName, @NonNull EnumSet<CoordinateSystemType> of) {
 
         ObservableSet<CRSInfo> observableSet =
-                map.values()
-                        .stream()
+                map.values().stream()
                         .filter(crs -> of.contains(crs.getCoordinateSystemType()))
                         .collect(Collectors.toCollection(FXCollections::observableSet));
         return new SimpleSetProperty<>(observableSet);
