@@ -89,12 +89,11 @@ class DataStoreEditorSkin extends SkinBase<DataStoreEditor> {
 
     private void addItems(List<Item> items) {
         for (Item item : items) {
-            if (log.isLoggable(java.util.logging.Level.FINE)) {
-                log.fine(
-                        String.format(
-                                "Adding item %s:%s = %s",
-                                item.getName(), item.getType(), item.getValue()));
-            }
+            log.fine(
+                    () ->
+                            String.format(
+                                    "Adding item %s:%s = %s",
+                                    item.getName(), item.getType(), item.getValue()));
             propertySheet.getItems().add(item);
         }
     }
@@ -111,8 +110,7 @@ class DataStoreEditorSkin extends SkinBase<DataStoreEditor> {
     }
 
     private List<Parameter> filterParams(ListProperty<Parameter> parameters, Level level) {
-        return parameters
-                .stream()
+        return parameters.stream()
                 .filter(p -> p.getDescriptor().getLevel() == level)
                 .collect(Collectors.toList());
     }

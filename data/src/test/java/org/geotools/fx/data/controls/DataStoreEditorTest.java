@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.geotools.arcsde.data.ArcSDEDataStoreFactory;
 import org.geotools.data.DataAccessFactory;
 import org.geotools.data.DataAccessFactory.Param;
 import org.geotools.data.DataAccessFinder;
@@ -82,10 +81,6 @@ public class DataStoreEditorTest extends ApplicationTest {
 
     public @Test final void testPropertiesFactory() throws InterruptedException {
         testFactory(new PropertyDataStoreFactory());
-    }
-
-    public @Test final void testArcsdeFactory() throws InterruptedException {
-        testFactory(new ArcSDEDataStoreFactory());
     }
 
     public @Test final void testOracleFactory() throws InterruptedException {

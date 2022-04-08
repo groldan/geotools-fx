@@ -76,8 +76,7 @@ public class LayerGroup extends MapLayer {
     public @Override @Nullable ReferencedEnvelope getBounds() {
 
         List<ReferencedEnvelope> allBounds =
-                layersProperty
-                        .stream() //
+                layersProperty.stream() //
                         .map((l) -> l.bounds().orElse(null)) //
                         .filter((b) -> b != null) //
                         .collect(Collectors.toList());
@@ -120,8 +119,7 @@ public class LayerGroup extends MapLayer {
         }
         final boolean mutuallyExclusive = this.mutuallyExclussiveVisibilityProperty.get();
         if (mutuallyExclusive) {
-            layersProperty
-                    .stream() //
+            layersProperty.stream() //
                     .filter((l) -> l.visibleProperty().get()) //
                     .skip(1) //
                     .forEach((l) -> l.visibleProperty().set(false));
@@ -135,8 +133,7 @@ public class LayerGroup extends MapLayer {
     private void mutuallyExclussiveVisibilityChanged(
             ObservableValue<? extends Boolean> prop, Boolean oldValue, Boolean newValue) {
         if (newValue.booleanValue()) {
-            layersProperty
-                    .stream() //
+            layersProperty.stream() //
                     .filter((l) -> l.visibleProperty().get()) //
                     .skip(1) //
                     .forEach((l) -> l.visibleProperty().set(false));
@@ -166,8 +163,7 @@ public class LayerGroup extends MapLayer {
                         });
             } else if (!newValue.booleanValue()) {
                 long visibleCount =
-                        group.layersProperty
-                                .stream()
+                        group.layersProperty.stream()
                                 .filter((l) -> l.visibleProperty().get())
                                 .count();
                 if (0 == visibleCount) {
