@@ -20,12 +20,12 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
-    <formatter-maven-plugin.version>2.10.0</formatter-maven-plugin.version>
-    <fmt.skip>false</fmt.skip>
-    <fmt.action>format</fmt.action>
-    <!-- or -Dfmt.action=validate -Dpom.fmt.action=verify -->
     <pom.fmt.action>sort</pom.fmt.action>
-    <pom.fmt.skip>${fmt.skip}</pom.fmt.skip>
+    <pom.fmt.skip>${spotless.apply.skip}</pom.fmt.skip>
+    <spotbugs.skip>false</spotbugs.skip>
+    <spotless.action>apply</spotless.action>
+    <spotless.apply.skip>false</spotless.apply.skip>
+
     <javafx.version>17.0.2</javafx.version>
     <lombok.version>1.18.22</lombok.version>
     <guava.version>31.1-jre</guava.version>
@@ -282,6 +282,11 @@
           <version>2.15.0</version>
         </plugin>
         <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>2.20.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
           <version>${org.openjfx.javafx-maven-plugin.version}</version>
@@ -359,6 +364,30 @@
           <createBackupFile>false</createBackupFile>
           <verifyFail>stop</verifyFail>
           <verifyFailOn>strict</verifyFailOn>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>${spotless.action}</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <java>
+            <googleJavaFormat>
+              <version>1.7</version>
+              <style>AOSP</style>
+            </googleJavaFormat>
+          </java>
+          <upToDateChecking>
+            <enabled>true</enabled>
+            <indexFile>${project.basedir}/.spotless-index</indexFile>
+          </upToDateChecking>
         </configuration>
       </plugin>
       <plugin>
