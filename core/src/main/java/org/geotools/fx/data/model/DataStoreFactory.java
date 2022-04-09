@@ -16,6 +16,8 @@
  */
 package org.geotools.fx.data.model;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -31,7 +33,6 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.geotools.data.DataAccessFactory;
-import org.geotools.data.DataAccessFactory.Param;
 
 /** JavaFX Bean adapter for {@link DataAccessFactory} */
 @ToString(onlyExplicitlyIncluded = true)
@@ -51,11 +52,11 @@ public class DataStoreFactory {
         descriptionProperty =
                 new SimpleStringProperty(this, "description", factory.getDescription());
 
-        Param[] parameters = factory.getParametersInfo();
-        ObservableList<ParameterDescriptor> params = FXCollections.observableArrayList();
-        for (Param p : parameters) {
-            params.add(new ParameterDescriptor(p));
-        }
+        ObservableList<ParameterDescriptor> params =
+                Stream.of(factory.getParametersInfo())
+                        .map(ParameterDescriptor::new)
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
         parameterDescriptorsProperty =
                 new SimpleListProperty<>(this, "parameterDescriptors", params);
 

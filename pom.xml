@@ -37,6 +37,8 @@
     <org.openjfx.javafx-maven-plugin.version>0.0.8</org.openjfx.javafx-maven-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-compiler-plugin.maxHeapSize>256M</maven-compiler-plugin.maxHeapSize>
+    <java.awt.headless>false</java.awt.headless>
+    <test.argLine>--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED --add-opens=java.desktop/sun.awt.image=ALL-UNNAMED --add-opens=java.naming/com.sun.jndi.ldap=ALL-UNNAMED --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</test.argLine>
   </properties>
 
   <dependencyManagement>
@@ -283,11 +285,7 @@
           <artifactId>javafx-maven-plugin</artifactId>
           <version>${org.openjfx.javafx-maven-plugin.version}</version>
           <inherited>true</inherited>
-          <configuration>
-            <source>${maven.compiler.source}</source>
-            <target>${maven.compiler.target}</target>
-            <release>${java.version}</release>
-          </configuration>
+          <configuration></configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -408,17 +406,28 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>--illegal-access=permit</argLine>
+          <runOrder>alphabetical</runOrder>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+          <excludes>
+            <exclude>${test.exclude.pattern}</exclude>
+          </excludes>
+          <forkMode>once</forkMode>
+          <enableAssertions>true</enableAssertions>
+          <printSummary>true</printSummary>
+          <testFailureIgnore>${allow.test.failure.ignore}</testFailureIgnore>
+          <excludedGroups>${test.excludedGroups}</excludedGroups>
+          <argLine>@{test.argLine}</argLine>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <configuration>
-          <argLine>--illegal-access=permit</argLine>
+          <argLine>@{test.argLine}</argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -446,6 +455,11 @@
         <configuration>
           <generateBackupPoms>false</generateBackupPoms>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
       </plugin>
     </plugins>
   </build>
