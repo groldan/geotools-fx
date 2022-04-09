@@ -20,6 +20,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
+    <gt.version>${project.version}</gt.version>
     <pom.fmt.action>sort</pom.fmt.action>
     <pom.fmt.skip>${spotless.apply.skip}</pom.fmt.skip>
     <spotbugs.skip>false</spotbugs.skip>
@@ -110,57 +111,52 @@
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-metadata</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-main</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-render</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-epsg-hsql</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-shapefile</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-property</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-geopkg</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools.jdbc</groupId>
         <artifactId>gt-jdbc-postgis</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools.jdbc</groupId>
         <artifactId>gt-jdbc-oracle</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.geotools</groupId>
-        <artifactId>gt-arcsde</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-mongodb</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
       </dependency>
 
       <!-- test dependencies -->
@@ -197,7 +193,7 @@
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-sample-data</artifactId>
-        <version>${project.version}</version>
+        <version>${gt.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
