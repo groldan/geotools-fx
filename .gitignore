@@ -34,3 +34,4 @@
 /build/
 
 .spotless-index
+.flattened-pom.xml
