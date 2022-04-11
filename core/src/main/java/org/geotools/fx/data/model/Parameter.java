@@ -16,7 +16,6 @@
  */
 package org.geotools.fx.data.model;
 
-import java.util.logging.Level;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -39,13 +38,18 @@ public class Parameter {
             new SimpleObjectProperty<>(this, "value") {
                 public @Override void set(Object newValue) {
                     Object value = Converters.convert(newValue, getDescriptor().getType());
-                    if (value != newValue && log.isLoggable(Level.FINE)) {
+                    if (value != newValue) {
                         log.fine(
-                                String.format(
-                                        "Parameter %s converted from %s to %s",
-                                        getDescriptor().getName(),
-                                        (newValue == null ? null : newValue.getClass().getName()),
-                                        (value == null ? null : value.getClass().getName())));
+                                () ->
+                                        String.format(
+                                                "Parameter %s converted from %s to %s",
+                                                getDescriptor().getName(),
+                                                (newValue == null
+                                                        ? null
+                                                        : newValue.getClass().getName()),
+                                                (value == null
+                                                        ? null
+                                                        : value.getClass().getName())));
                     }
                     super.set(value);
                 }

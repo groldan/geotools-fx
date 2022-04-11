@@ -16,6 +16,8 @@
  */
 package org.geotools.fx.data.controls;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -56,12 +58,14 @@ public class DataStoreEditor extends Control {
 
         factoryProperty.addListener(
                 (p, oldVal, factory) -> {
-                    ObservableList<Parameter> params = FXCollections.observableArrayList();
-                    if (factory != null) {
-                        for (ParameterDescriptor pd : factory.getParameterDescriptors()) {
-                            params.add(new Parameter(pd));
-                        }
-                    }
+                    List<ParameterDescriptor> descriptors =
+                            null == factory ? List.of() : factory.getParameterDescriptors();
+                    ObservableList<Parameter> params =
+                            descriptors.stream()
+                                    .map(Parameter::new)
+                                    .collect(
+                                            Collectors.toCollection(
+                                                    FXCollections::observableArrayList));
                     parametersProperty.set(params);
                 });
     }

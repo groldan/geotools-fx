@@ -19,7 +19,9 @@ package org.geotools.fx.data.controls.internal;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.TimeZone;
+import javafx.scene.Node;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.controlsfx.control.PropertySheet.Item;
 import org.controlsfx.property.editor.DefaultPropertyEditorFactory;
 import org.controlsfx.property.editor.PropertyEditor;
@@ -28,6 +30,18 @@ public class ParameterPropertyEditorFactory extends DefaultPropertyEditorFactory
 
     public @Override PropertyEditor<?> call(@NonNull Item item) {
         final Class<?> type = item.getType();
+
+        if (Number.class.isAssignableFrom(type)) {
+            @SuppressWarnings("unchecked")
+            PropertyEditor<Number> editor = (PropertyEditor<Number>) super.call(item);
+            return new AcceptNullPropertyEditor<>(editor, 0);
+        }
+
+        if (Boolean.class.isAssignableFrom(type)) {
+            @SuppressWarnings("unchecked")
+            PropertyEditor<Boolean> editor = (PropertyEditor<Boolean>) super.call(item);
+            return new AcceptNullPropertyEditor<>(editor, Boolean.FALSE);
+        }
 
         if (TimeZone.class.equals(type)) {
             return PropertyEditors.createTimezoneEditor(item);
@@ -44,5 +58,24 @@ public class ParameterPropertyEditorFactory extends DefaultPropertyEditorFactory
             return PropertyEditors.createCharsetEditor(item);
         }
         return super.call(item);
+    }
+
+    @RequiredArgsConstructor
+    static class AcceptNullPropertyEditor<T> implements PropertyEditor<T> {
+
+        private final @NonNull PropertyEditor<T> editor;
+        private final @NonNull T defValue;
+
+        public @Override Node getEditor() {
+            return editor.getEditor();
+        }
+
+        public @Override T getValue() {
+            return editor.getValue();
+        }
+
+        public @Override void setValue(T value) {
+            editor.setValue(null == value ? defValue : value);
+        }
     }
 }

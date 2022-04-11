@@ -35,3 +35,6 @@
 
 .spotless-index
 .flattened-pom.xml
+# https://bugs.openjdk.java.net/browse/JDK-8214300
+.attach_pid*
+
